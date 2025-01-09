@@ -1,9 +1,11 @@
 import React from "react";
-import { useGetAllStudentsQuery } from "../services/StudentApiSlice";
-import {Link} from "react-router"
+import { useDeleteStudentMutation, useGetAllStudentsQuery } from "../services/StudentApiSlice";
+import { Link } from "react-router";
+
 
 const GetAllStudents = () => {
 
+//operations
   const {
     data: students,
     isLoading,
@@ -11,13 +13,32 @@ const GetAllStudents = () => {
     isSuccess,
   } = useGetAllStudentsQuery();
 
+  const[deleteStudent] = useDeleteStudentMutation();
+
+
+  //delete operation
+  const handleDelete = async (id) =>{
+       try {
+         await deleteStudent(id).unwrap();
+         console.log("student deleted successfuly");
+         
+       } catch (error) {
+          console.error(error);
+       }
+  }
+
+
   return (
     <div className="p-4">
       <div className="flex justify-between">
         <div className="text-lg font-bold mb-4">
-          Number of Students: <span className="px-3 py-1 bg-blue-600 text-white rounded-full"> {students && students.length}</span>
+          Number of Students:{" "}
+          <span className="px-3 py-1 bg-blue-600 text-white rounded-full">
+            {" "}
+            {students && students.length}
+          </span>
         </div>
-        <Link to={"/create"} >
+        <Link to={"/create"}>
           <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 rounded-md text-white">
             Add a new student
           </button>
@@ -66,15 +87,18 @@ const GetAllStudents = () => {
                     {student.gender}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 flex items-center justify-center space-x-3">
-                    <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 ">
+                    <button  onClick={()=>handleDelete(student._id)}
+                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 ">
                       Delete
                     </button>
                     <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 ">
                       Update
                     </button>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 ">
-                      Details
-                    </button>
+                    <Link to={`/details/${student._id}`}>
+                      <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 ">
+                        Details
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
