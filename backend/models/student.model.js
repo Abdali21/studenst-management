@@ -12,12 +12,12 @@ const studentSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["Male", "Female"],
+      enum: ["male", "female"],
       required: true,
     },
     departement: {
       type: String,
-      enum: ["class A", "class B", "class C"],
+      enum: ["classA", "classB", "classC"],
       required: true,
     },
     email: {

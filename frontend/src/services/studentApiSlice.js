@@ -7,6 +7,7 @@ export const studentSliceApi = createApi({
     }),
     tagTypes:["Students"],
     endpoints:(builder) => ({
+
         //get all students
         getAllStudents:builder.query({
             query:() =>({
@@ -14,8 +15,18 @@ export const studentSliceApi = createApi({
                 method:"GET"
             }),
             providesTags:["Students"]
+        }),
+
+        //add student
+        createStudent:builder.mutation({
+            query:(data)=>({
+                url:"/create",
+                method:"POST",
+                body:data,
+            }),
+           invalidatesTags:["Students"]
         })
     })
 });
 
-export const {useGetAllStudentsQuery} = studentSliceApi;
+export const {useGetAllStudentsQuery, useCreateStudentMutation} = studentSliceApi;

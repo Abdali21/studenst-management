@@ -5,7 +5,7 @@ export const createStudent = async (req, res) => {
   try {
     const student = req.body;
     const newStudent = await studentModel.create(student);
-    res.status(201).json(student);
+    res.status(201).json(newStudent);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

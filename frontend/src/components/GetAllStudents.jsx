@@ -1,7 +1,9 @@
 import React from "react";
 import { useGetAllStudentsQuery } from "../services/StudentApiSlice";
+import {Link} from "react-router"
 
 const GetAllStudents = () => {
+
   const {
     data: students,
     isLoading,
@@ -15,11 +17,11 @@ const GetAllStudents = () => {
         <div className="text-lg font-bold mb-4">
           Number of Students: <span className="px-3 py-1 bg-blue-600 text-white rounded-full"> {students && students.length}</span>
         </div>
-        <div>
+        <Link to={"/create"} >
           <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 rounded-md text-white">
             Add a new student
           </button>
-        </div>
+        </Link>
       </div>
 
       <hr className="my-4" />
