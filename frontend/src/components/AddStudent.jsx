@@ -18,8 +18,10 @@ const AddStudent = () => {
        await createStudent(data).unwrap();
        reset();
        navigate("/")
+       alert("Student created successfully")
        console.log("Student created successfully");
      } catch (error) {
+      alert("error creating student")
       console.error("Error creating student:", error);
      }
   };
