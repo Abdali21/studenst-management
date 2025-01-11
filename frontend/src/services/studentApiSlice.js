@@ -34,6 +34,15 @@ export const studentSliceApi = createApi({
       }),
     }),
 
+    //update student
+    updateStudent:builder.mutation({
+      query:({id,...data})=>({
+        url:`/update/${id}`,
+        method:"PUT",
+        body:data
+      }),
+    }),
+
     //delete student
     deleteStudent: builder.mutation({
       query: (id) => ({
@@ -50,4 +59,5 @@ export const {
   useCreateStudentMutation,
   useGetOneStudentQuery,
   useDeleteStudentMutation,
+  useUpdateStudentMutation,
 } = studentSliceApi;
